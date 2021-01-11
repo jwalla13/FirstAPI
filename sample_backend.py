@@ -12,11 +12,20 @@ def get_users():
   search_username = request.args.get('name') #accessing the value 
   if search_username:
     subdict = {'users_list': []}
-    for user in users['user_list']:
+    for user in users['users_list']:
       if user['name'] == search_username:
       	subdict['users_list'].append(user)
     return subdict
   return users
+
+@app.route('/users/<id>')
+def get_user(id):
+   if id :
+      for user in users['users_list']:
+        if user['id'] == id:
+           return user
+      return ({})
+   return users
 
 users = { 
    'users_list' :
